@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue River x Rogo — 14-Day Trial Plan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: rgba(253, 253, 252, 1);
+  --bg-secondary: rgba(250, 250, 249, 1);
+  --bg-tertiary: rgba(245, 245, 244, 1);
+  --bg-quaternary: rgba(238, 237, 236, 1);
+  --surface: rgba(255, 255, 255, 1);
+  --elevated: rgba(28, 25, 23, 0.05);
+  --text-primary: rgba(28, 25, 23, 1);
+  --text-secondary: rgba(68, 64, 60, 1);
+  --text-tertiary: rgba(120, 113, 108, 1);
+  --text-quaternary: rgba(168, 162, 158, 1);
+  --border-primary: rgba(12, 10, 9, 0.1);
+  --border-primary-solid: rgba(231, 229, 228, 1);
+  --border-secondary: rgba(12, 10, 9, 0.2);
+  --border-secondary-solid: rgba(214, 211, 209, 1);
+  --brand-primary: rgba(19, 91, 68, 1);
+  --brand-primary-hover: rgba(29, 117, 89, 1);
+  --brand-secondary: rgba(13, 143, 101, 0.2);
+  --brand-secondary-solid: rgba(207, 233, 224, 1);
+  --brand-foreground: rgba(245, 245, 244, 1);
+  --surface-inverted: rgba(41, 37, 36, 1);
+  --text-primary-inverted: rgba(250, 250, 249, 1);
+  --text-secondary-inverted: rgba(214, 211, 209, 1);
+  --destructive: rgba(220, 38, 38, 1);
+  --warning: rgba(245, 158, 11, 1);
+  --success: rgba(19, 91, 68, 1);
+  --chart-1: rgb(27, 140, 108);
+  --chart-2: rgb(83, 167, 210);
+  --chart-3: rgb(253, 161, 100);
+  --chart-4: rgb(60, 102, 126);
+  --chart-5: rgb(158, 120, 143);
+  --shadow-xs: 0 0 4px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 1px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  padding: 32px 24px;
+}
+.container { max-width: 1000px; margin: 0 auto; }
+
+/* Header */
+.header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.header-left h1 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+.header-left .subtitle { font-size: 0.875rem; color: var(--text-tertiary); margin-top: 4px; }
+.header-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.75rem; font-weight: 500; height: 24px; padding: 0 8px; border-radius: 9999px;
+}
+.badge-brand { background: var(--brand-secondary); color: var(--brand-primary); }
+.badge-muted { background: var(--bg-tertiary); color: var(--text-secondary); }
+
+/* KPI Strip */
+.kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.kpi-card {
+  background: var(--surface); border: 1px solid var(--border-primary-solid);
+  border-radius: var(--radius-lg); padding: 16px;
+}
+.kpi-label { font-size: 0.6875rem; color: var(--text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi-value { font-size: 1.25rem; font-weight: 600; margin-top: 4px; }
+.kpi-sub { font-size: 0.6875rem; color: var(--text-tertiary); margin-top: 2px; }
+
+/* ========== TABS ========== */
+.tab-bar {
+  display: flex; gap: 0; border-bottom: 2px solid var(--border-primary-solid);
+  margin-bottom: 24px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.tab-btn {
+  padding: 10px 20px; font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500;
+  color: var(--text-tertiary); background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active { color: var(--brand-primary); border-bottom-color: var(--brand-primary); font-weight: 600; }
+.tab-panel { display: none; animation: fadeIn 0.2s ease; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Section */
+.section { margin-bottom: 28px; }
+.section-header {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-primary-solid);
+}
+.section-header h2 { font-size: 1.0625rem; font-weight: 600; }
+.section-header .section-badge {
+  font-size: 0.6875rem; font-weight: 500; padding: 2px 8px; border-radius: 9999px;
+  background: var(--bg-tertiary); color: var(--text-tertiary);
+}
+.section-desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+
+/* Cards */
+.card {
+  background: var(--surface); border: 1px solid var(--border-primary-solid);
+  border-radius: var(--radius-lg); padding: 20px; margin-bottom: 12px;
+}
+.card-flat {
+  background: var(--bg-secondary); border-radius: var(--radius-lg);
+  padding: 16px; margin-bottom: 12px;
+}
+
+/* Meeting card */
+.meeting-card {
+  background: var(--surface); border: 1px solid var(--border-primary-solid);
+  border-radius: var(--radius-lg); padding: 20px; margin-bottom: 12px;
+}
+.meeting-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.meeting-title { font-size: 0.9375rem; font-weight: 600; }
+.meeting-time {
+  font-size: 0.75rem; font-weight: 500; color: var(--brand-primary);
+  background: var(--brand-secondary); padding: 2px 10px; border-radius: 9999px; white-space: nowrap;
+}
+.meeting-time.tbd { background: rgba(245,158,11,0.15); color: #92400e; }
+.meeting-attendees { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+.attendee {
+  font-size: 0.6875rem; font-weight: 500; padding: 2px 8px; border-radius: 9999px;
+  background: var(--bg-tertiary); color: var(--text-secondary);
+}
+.attendee.rogo { background: var(--brand-secondary); color: var(--brand-primary); }
+
+/* Two col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.col-header { font-size: 0.6875rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+
+/* Lists */
+ul.checklist, ul.bullet { list-style: none; padding: 0; }
+ul.checklist li, ul.bullet li {
+  font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.7; padding-left: 20px; position: relative;
+}
+ul.checklist li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 10px; height: 10px; border-radius: 3px;
+  border: 1.5px solid var(--border-secondary-solid); background: var(--surface);
+}
+ul.bullet li::before {
+  content: ''; position: absolute; left: 3px; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--chart-1);
+}
+/* Color-coded bullets */
+.bullet-blue li::before { background: var(--chart-2); }
+.bullet-orange li::before { background: var(--chart-3); }
+.bullet-teal li::before { background: var(--chart-4); }
+.bullet-mauve li::before { background: var(--chart-5); }
+
+/* Query box */
+.query-box {
+  background: var(--surface-inverted); color: var(--text-primary-inverted);
+  font-size: 0.8125rem; line-height: 1.6; padding: 12px 16px;
+  border-radius: var(--radius-md); margin-top: 8px; margin-bottom: 4px;
+}
+.query-label {
+  font-size: 0.6875rem; font-weight: 600; color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-top: 16px; margin-bottom: 4px;
+}
+
+/* Skill cards */
+.skill-card {
+  background: var(--surface); border: 1px solid var(--border-primary-solid);
+  border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 8px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.skill-icon {
+  width: 32px; height: 32px; border-radius: var(--radius-md);
+  background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.8125rem; font-weight: 600; color: var(--text-tertiary);
+}
+.skill-name { font-size: 0.875rem; font-weight: 600; }
+.skill-desc { font-size: 0.8125rem; color: var(--text-tertiary); margin-top: 2px; line-height: 1.5; }
+.skill-status { font-size: 0.6875rem; font-weight: 600; margin-top: 4px; }
+.status-live { color: var(--success); }
+.status-building { color: var(--warning); }
+.status-planned { color: var(--text-quaternary); }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 20px; }
+.timeline::before {
+  content: ''; position: absolute; left: 5px; top: 4px; bottom: 4px;
+  width: 2px; background: var(--border-primary-solid);
+}
+.timeline-item { position: relative; margin-bottom: 20px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -20px; top: 4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--chart-1); background: var(--surface);
+}
+.timeline-item.active::before { background: var(--chart-1); border-color: var(--chart-1); }
+.timeline-date { font-size: 0.75rem; font-weight: 600; color: var(--brand-primary); }
+.timeline-label { font-size: 0.875rem; font-weight: 500; margin-top: 2px; }
+.timeline-detail { font-size: 0.8125rem; color: var(--text-tertiary); margin-top: 2px; line-height: 1.5; }
+
+/* Connectors */
+.connector-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.connector-item { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 12px; text-align: center; }
+.connector-name { font-size: 0.8125rem; font-weight: 600; }
+.connector-note { font-size: 0.6875rem; color: var(--text-tertiary); margin-top: 2px; }
+
+/* Callout */
+.callout { background: var(--brand-secondary); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 12px; }
+.callout-title { font-size: 0.8125rem; font-weight: 600; color: var(--brand-primary); margin-bottom: 4px; }
+.callout-text { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* Person row */
+.person-row { margin-bottom: 16px; }
+.person-row:last-child { margin-bottom: 0; }
+.person-name { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+.person-role { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 6px; }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid var(--border-primary-solid); margin: 28px 0; }
+
+/* Pillar header badge inline */
+.pillar-tag {
+  display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em;
+  padding: 2px 8px; border-radius: 9999px; margin-bottom: 8px;
+}
+.pillar-tag.green { background: rgba(27,140,108,0.12); color: var(--chart-1); }
+.pillar-tag.blue { background: rgba(83,167,210,0.15); color: rgb(40,110,160); }
+.pillar-tag.orange { background: rgba(253,161,100,0.18); color: rgb(180,90,30); }
+.pillar-tag.teal { background: rgba(60,102,126,0.15); color: var(--chart-4); }
+
+/* Footer */
+.footer { text-align: center; padding: 24px 0 8px; font-size: 0.75rem; color: var(--text-quaternary); }
+
+@media (max-width: 700px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .two-col { grid-template-columns: 1fr; }
+  .connector-grid { grid-template-columns: 1fr 1fr; }
+  .tab-btn { padding: 8px 12px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Blue River Financial Group x Rogo</h1>
+      <div class="subtitle">14-Day Trial Action Plan &mdash; Prepared for Rich Phillips &amp; Team</div>
+    </div>
+    <div class="header-right">
+      <span class="badge badge-brand">Trial Active</span>
+      <span class="badge badge-muted">Apr 13 &ndash; Apr 27, 2026</span>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-label">Trial Window</div>
+      <div class="kpi-value">14 Days</div>
+      <div class="kpi-sub">Apr 13 &ndash; Apr 27</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Team Licenses</div>
+      <div class="kpi-value">10</div>
+      <div class="kpi-sub">Full access, unlimited usage</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Priority Pillars</div>
+      <div class="kpi-value">4</div>
+      <div class="kpi-sub">Across 5 team groups</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Rogo Contacts</div>
+      <div class="kpi-value">Ben &amp; Ansh</div>
+      <div class="kpi-sub">Available daily, incl. evenings</div>
+    </div>
+  </div>
+
+  <!-- ========== TAB BAR ========== -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="switchTab('sellside')">Sell Side &amp; Valuation</button>
+    <button class="tab-btn" onclick="switchTab('buyside')">Buy Side &amp; Outreach</button>
+    <button class="tab-btn" onclick="switchTab('research')">Research</button>
+    <button class="tab-btn" onclick="switchTab('aod')">AOD</button>
+    <button class="tab-btn" onclick="switchTab('skills')">Skills &amp; Deliverables</button>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: OVERVIEW -->
+  <!-- ===================================================================== -->
+  <div id="tab-overview" class="tab-panel active">
+
+    <!-- Timeline -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Trial Timeline</h2>
+        <span class="section-badge">Key Milestones</span>
+      </div>
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item active">
+            <div class="timeline-date">Apr 13 (Today)</div>
+            <div class="timeline-label">Trial Kickoff</div>
+            <div class="timeline-detail">Logins distributed. Connectors activated. Research deep-dive with Will completed.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 14 (Tomorrow)</div>
+            <div class="timeline-label">Group Deep-Dives</div>
+            <div class="timeline-detail">Buy Side @ 12:00 PM ET &bull; Bill 1:1 @ 1:00 PM ET &bull; Sell Side @ 4:30 PM ET</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 15&ndash;17</div>
+            <div class="timeline-label">Skills Build &amp; Testing</div>
+            <div class="timeline-detail">Ben &amp; Ansh build refined skills from group sessions. Team tests and iterates.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 18 (Friday)</div>
+            <div class="timeline-label">Mid-Trial Office Hours</div>
+            <div class="timeline-detail">Full team regroup. Usage review, knowledge sharing, skill refinements.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 19&ndash;25</div>
+            <div class="timeline-label">Full Adoption &amp; Stress Testing</div>
+            <div class="timeline-detail">Live engagement workflows. Skills refined to 100%. Skill builder UI ships to team.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 27</div>
+            <div class="timeline-label">Trial Wrap-Up</div>
+            <div class="timeline-detail">Usage report, power user leaderboard, enterprise deployment discussion.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's Action Items -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Action Items for Today</h2>
+        <span class="section-badge">All Team Members</span>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">Step 1 &mdash; Log In &amp; Activate Connectors</div>
+        <div class="callout-text">Log into <strong>app.rogo.ai</strong> using the invite in your inbox. Go to <strong>Account Settings &gt; Connections</strong> (bottom-left) and authenticate into each connector. An admin (Randi or Rich) will need to permission the org-level Salesforce and SharePoint connections.</div>
+      </div>
+
+      <div class="connector-grid">
+        <div class="connector-item">
+          <div class="connector-name">Salesforce</div>
+          <div class="connector-note">Requires admin auth</div>
+        </div>
+        <div class="connector-item">
+          <div class="connector-name">SharePoint / OneDrive</div>
+          <div class="connector-note">Requires admin auth</div>
+        </div>
+        <div class="connector-item">
+          <div class="connector-name">Outlook / Email</div>
+          <div class="connector-note">Individual auth</div>
+        </div>
+      </div>
+
+      <div style="height: 12px;"></div>
+
+      <div class="callout">
+        <div class="callout-title">Step 2 &mdash; Activate Felix via Email</div>
+        <div class="callout-text">Click <strong>"Try Felix"</strong> in the bottom-left of the app. Felix will email you from felix@rogoagent.ai. Forward any email to Felix for instant analysis, meeting prep, or deliverable creation&mdash;same full capabilities as the chat interface.</div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">Step 3 &mdash; Run 2&ndash;3 Exploratory Queries</div>
+        <div class="callout-text">Click into your group's tab above for sample prompts. Use the <strong>"Improve Prompt"</strong> button for better outputs. The more context you give (why, for whom, what format), the better the result. Set up a <strong>Scheduled Task</strong> for a daily briefing&mdash;industry news, calendar prep, or pipeline digest.</div>
+      </div>
+    </div>
+
+    <!-- Key Reminders -->
+    <div class="section">
+      <div class="section-header"><h2>Key Reminders</h2></div>
+      <div class="card-flat">
+        <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Security &amp; Confidentiality</div>
+        <div style="font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6;">All data is fully encrypted end-to-end. Rogo cannot see your queries or documents&mdash;only anonymized telemetry. Nothing is shared across clients. Safe to use client-provided content and proprietary materials.</div>
+      </div>
+      <div class="card-flat">
+        <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Data Sources (Out-of-the-Box, No Subscription Required)</div>
+        <div style="font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6;">Capital IQ, PitchBook, Crunchbase, SEC filings, earnings transcripts, investor presentations, international filings, UK Companies House, and full web. For Grata, ZoomInfo, IBIS World, GF Data, Deal Stats&mdash;export &amp; drag-and-drop into Rogo.</div>
+      </div>
+      <div class="card-flat">
+        <div style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Pricing &amp; Licensing</div>
+        <div style="font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6;">10 trial licenses active. Unlimited queries, no token caps. After trial, 1 license continues for 1 year ($6K, already invoiced). Grandfathered unlimited pricing confirmed through end of April. All work &amp; skills persist.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: SELL SIDE & VALUATION -->
+  <!-- ===================================================================== -->
+  <div id="tab-sellside" class="tab-panel">
+
+    <!-- Meeting -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Scheduled Session</h2>
+        <span class="section-badge">Tomorrow</span>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-header">
+          <div class="meeting-title">Sell Side &amp; Valuation Deep-Dive</div>
+          <div class="meeting-time">Tue Apr 14 &mdash; 4:30 PM ET</div>
+        </div>
+        <div class="meeting-attendees">
+          <span class="attendee">Matt Feldman</span>
+          <span class="attendee">Evan Haigh</span>
+          <span class="attendee">Gavin Nafso</span>
+          <span class="attendee">Rich Phillips (optional)</span>
+          <span class="attendee rogo">Ben (Rogo)</span>
+        </div>
+        <div class="section-desc" style="margin-bottom:0;">Goal: Walk Ben through the entire sell-side workflow&mdash;from engagement kickoff to final deliverable&mdash;so we can build skills that replicate your exact process.</div>
+      </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="section">
+      <div class="section-header"><h2>Use Cases to Test</h2></div>
+      <div class="card">
+        <span class="pillar-tag orange">VALUATION &amp; SELL SIDE</span>
+        <ul class="bullet bullet-orange">
+          <li><strong>Valuation model automation</strong> &mdash; DCF, comps, precedent transactions with populated data</li>
+          <li><strong>Migrate Gavin's ChatGPT workflow</strong> &mdash; bring existing valuation prompts/tools into Rogo as a persistent skill</li>
+          <li><strong>CIM generation</strong> &mdash; one-click confidential information memorandum from engagement inputs</li>
+          <li><strong>Teaser &amp; pitch deck creation</strong> &mdash; auto-built sell-side marketing materials using Blue River templates</li>
+          <li><strong>NDA &amp; process letter generation</strong> &mdash; standard deal documents populated from engagement data</li>
+          <li><strong>Comparable companies &amp; precedent transaction analysis</strong> &mdash; auto-pulled from PitchBook/CapIQ</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Two-col: what we need / what we deliver -->
+    <div class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-header"><h2>What We Need from You</h2></div>
+          <div class="card">
+            <ul class="checklist">
+              <li>Gavin's ChatGPT/Claude valuation workflow &amp; prompts (we'll migrate them into a Rogo skill)</li>
+              <li>Valuation model template(s) your team currently uses (Excel)</li>
+              <li>Example completed valuation to benchmark Rogo's output against</li>
+              <li>Example CIM, teaser, and/or pitch deck (PowerPoint preferred)</li>
+              <li>End-to-end sell-side process walkthrough: data sources at each step, decision points, final output format</li>
+              <li>Gavin: your proprietary tool built in ChatGPT&mdash;share it and we'll port it into Rogo's environment</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="section-header"><h2>What Rogo Will Deliver</h2></div>
+          <div class="card">
+            <ul class="bullet bullet-orange">
+              <li><strong>Valuation model skill</strong> &mdash; DCF, comps, precedent tx, formatted Excel with sensitivity tables</li>
+              <li><strong>CIM/teaser/pitch skill</strong> &mdash; branded PowerPoint output from engagement inputs</li>
+              <li><strong>Gavin's tool migrated</strong> &mdash; your ChatGPT valuation workflow as a persistent Rogo skill (improved with CapIQ/PitchBook data)</li>
+              <li><strong>Loom video walkthrough</strong> of each skill so the full team can replicate</li>
+              <li>Pre-built DCF, LBO, and comps skills already in your environment to test today</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample queries -->
+    <div class="section">
+      <div class="section-header"><h2>Sample Queries to Run Today</h2></div>
+      <div class="query-box">"Build a DCF model for a private company with $15M revenue, 20% EBITDA margins, growing at 8% annually. Use a 12% discount rate and 6x exit multiple. Output an Excel model with sensitivity tables on growth rate and exit multiple."</div>
+      <div class="query-box">"Create a comparable companies analysis for publicly traded HVAC services companies. Include EV/Revenue, EV/EBITDA, and P/E multiples for the most recent fiscal year. Output as a formatted Excel."</div>
+      <div class="query-box">"Find all M&amp;A transactions in the industrial automation space over the last 12 months with disclosed deal values. Show acquirer, target, deal value, EV/EBITDA, and a one-line deal rationale."</div>
+      <div class="query-box">"I need to prep for a sell-side engagement. The client is a $25M revenue commercial cleaning company in Texas. Build me a one-page teaser with company overview, financial highlights, and key investment merits."</div>
+    </div>
+
+    <!-- Skills -->
+    <div class="section">
+      <div class="section-header"><h2>Skills Being Built</h2></div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-3);">V</div>
+        <div>
+          <div class="skill-name">Valuation Model Automation</div>
+          <div class="skill-desc">Migrate Gavin's ChatGPT process + Blue River's model template. Auto-populates DCF, comps, precedent transactions from PitchBook/CapIQ. Outputs formatted Excel with sensitivity tables.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Session (Apr 14, 4:30 PM)</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-3);">C</div>
+        <div>
+          <div class="skill-name">CIM / Teaser / Pitch Deck</div>
+          <div class="skill-desc">One-click branded sell-side materials. Input engagement details, outputs formatted PowerPoint CIM, teaser, or pitch with financials, market context, and company overview.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Template &amp; Examples</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: BUY SIDE & OUTREACH -->
+  <!-- ===================================================================== -->
+  <div id="tab-buyside" class="tab-panel">
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Scheduled Session</h2>
+        <span class="section-badge">Tomorrow</span>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-header">
+          <div class="meeting-title">Buy Side &amp; Outreach Deep-Dive</div>
+          <div class="meeting-time">Tue Apr 14 &mdash; 12:00 PM ET</div>
+        </div>
+        <div class="meeting-attendees">
+          <span class="attendee">Michael Herrmann</span>
+          <span class="attendee">Adam Delisser</span>
+          <span class="attendee">Rich Phillips</span>
+          <span class="attendee">Randi Babi</span>
+          <span class="attendee rogo">Ben (Rogo)</span>
+        </div>
+        <div class="section-desc" style="margin-bottom:0;">Goal: Understand the full buy-side workflow from client criteria intake through personalized marketing materials and outreach messaging.</div>
+      </div>
+
+      <!-- Also: Bill 1:1 -->
+      <div class="meeting-card">
+        <div class="meeting-header">
+          <div class="meeting-title">Bill Loftis &mdash; 1:1 Strategic Overview</div>
+          <div class="meeting-time">Tue Apr 14 &mdash; 1:00 PM ET (11 AM MT)</div>
+        </div>
+        <div class="meeting-attendees">
+          <span class="attendee">Bill Loftis</span>
+          <span class="attendee rogo">Ben (Rogo)</span>
+        </div>
+        <div class="section-desc" style="margin-bottom:0;">Proprietary tool migration from ChatGPT/Claude, firm-wide AI vision, Salesforce dashboards, scheduled tasks.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Use Cases to Test</h2></div>
+      <div class="card">
+        <span class="pillar-tag teal">BUY SIDE &amp; OUTREACH</span>
+        <ul class="bullet bullet-teal">
+          <li><strong>Personalized outreach emails</strong> &mdash; synergy-based value props tailored to each buyer/target pairing</li>
+          <li><strong>Talk tracks &amp; call scripts</strong> &mdash; customized by target's services, geography, and ownership</li>
+          <li><strong>Client criteria intake &rarr; auto-messaging</strong> &mdash; drag-and-drop criteria, auto-generate materials at scale</li>
+          <li><strong>Salesforce pipeline queries</strong> &mdash; "show me all targets without a touchpoint in 14+ days"</li>
+          <li><strong>Scheduled pipeline digests</strong> &mdash; daily/weekly email of stale targets, upcoming tasks, pipeline health</li>
+          <li><strong>Meeting prep dashboards</strong> &mdash; pull Salesforce account + email history + recent deals into one view</li>
+          <li><strong>Marketing material generation</strong> &mdash; replicate IT8-style buyer outreach documents per engagement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-header"><h2>What We Need from You</h2></div>
+          <div class="card">
+            <div class="person-row">
+              <div class="person-name">Michael Herrmann &amp; Adam Delisser</div>
+              <ul class="checklist">
+                <li>Sample marketing materials (IT8 + other outreach examples) in original format</li>
+                <li>Walkthrough of personalized outreach creation: client criteria &rarr; target research &rarr; messaging</li>
+                <li>Categories of value prop prompts used per target (products, geography, ownership)</li>
+                <li>An example engagement to test automated messaging against</li>
+              </ul>
+            </div>
+            <div class="person-row">
+              <div class="person-name">Randi Babi</div>
+              <ul class="checklist">
+                <li>Salesforce custom object map (targets, engagements, AOD, pivots&mdash;key fields &amp; relationships)</li>
+                <li>Admin auth for Salesforce &amp; SharePoint org-level connectors</li>
+                <li>Any existing AI automations to migrate into Rogo</li>
+              </ul>
+            </div>
+            <div class="person-row" style="margin-bottom:0;">
+              <div class="person-name">Bill Loftis</div>
+              <ul class="checklist">
+                <li>Proprietary tools/prompts built in ChatGPT or Claude</li>
+                <li>Specific Salesforce reports or dashboards to replicate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-header"><h2>What Rogo Will Deliver</h2></div>
+          <div class="card">
+            <ul class="bullet bullet-teal">
+              <li><strong>Marketing outreach skill</strong> &mdash; drag-and-drop criteria, auto-generates personalized emails + talk tracks per target</li>
+              <li><strong>Salesforce navigation skill</strong> &mdash; teaches Rogo your custom objects so queries like "stale targets" just work</li>
+              <li><strong>Scheduled pipeline digest</strong> &mdash; configurable daily/weekly email of inactive targets, upcoming tasks</li>
+              <li><strong>Meeting prep automation</strong> &mdash; one prompt pulls SF account, email history, deals, and builds a dashboard or deck</li>
+              <li><strong>Bill's proprietary tools migrated</strong> into persistent Rogo skills</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Sample Queries to Run Today</h2></div>
+      <div class="query-box">"Pull the Salesforce account for [client name]. Summarize our last 3 interactions and their investment criteria. Then draft a follow-up email with a market update on their target sector."</div>
+      <div class="query-box">"I'm working with a PE client that owns a commercial cleaning platform in Texas. Draft a personalized outreach email to the CEO of a 50-person janitorial services company explaining why a partnership would be strategic. Include 3 specific synergies."</div>
+      <div class="query-box">"Create a daily scheduled task: every morning at 9 AM, pull my calendar, identify all meetings, search Salesforce and my email for context on each, and send me a briefing with talking points and recommended next steps."</div>
+      <div class="query-box">"Build me an interactive dashboard for [PE client]. Pull their account info from Salesforce, show their investment strategy, recent M&amp;A activity in their target sectors, and a public comps table for the top companies in their space."</div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Skills Being Built</h2></div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-4);">M</div>
+        <div>
+          <div class="skill-name">Marketing Outreach &amp; Messaging</div>
+          <div class="skill-desc">Drag-and-drop client criteria &rarr; auto-generates personalized outreach emails, talk tracks, and value prop summaries per target. Pulls from Salesforce + web for warm context.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Buy Side Session (Apr 14, 12 PM)</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-4);">S</div>
+        <div>
+          <div class="skill-name">Salesforce Navigation</div>
+          <div class="skill-desc">Teaches Rogo Blue River's custom Salesforce objects (targets, engagements, AOD, pivots). Enables natural-language queries across your CRM without manual exports.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Custom Object Map from Randi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: RESEARCH -->
+  <!-- ===================================================================== -->
+  <div id="tab-research" class="tab-panel">
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Session Completed</h2>
+        <span class="section-badge">Today</span>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-header">
+          <div class="meeting-title">Research Deep-Dive with Will Morrison</div>
+          <div class="meeting-time" style="background: rgba(27,140,108,0.12); color: var(--chart-1);">Completed &mdash; Apr 13</div>
+        </div>
+        <div class="meeting-attendees">
+          <span class="attendee">Will Morrison</span>
+          <span class="attendee">Rich Phillips</span>
+          <span class="attendee rogo">Ben (Rogo)</span>
+        </div>
+        <div class="section-desc" style="margin-bottom:0;">Covered: target list building workflow, Grata comparison, SBA database processing, NEO/QIR/MIR report creation, Canva-to-PPTX conversion, data source identification.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Use Cases to Test</h2></div>
+      <div class="card">
+        <span class="pillar-tag green">TARGET LISTS</span>
+        <ul class="bullet">
+          <li><strong>Client criteria &rarr; formatted target list</strong> &mdash; upload criteria, get a Blue River-formatted Excel with all columns populated</li>
+          <li><strong>Large dataset filtering</strong> &mdash; upload SBA list (8,000+ records), filter by services, size, geography, ownership</li>
+          <li><strong>Supplement Grata/ZoomInfo</strong> &mdash; Rogo fills employee count, revenue, ownership from PitchBook, Crunchbase, LinkedIn, web</li>
+          <li><strong>Strategic rationale per target</strong> &mdash; auto-generated synergies for each target based on platform and sponsor context</li>
+          <li><strong>Grata comparison test</strong> &mdash; build same list with and without Grata input, compare coverage and accuracy</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pillar-tag blue">INDUSTRY REPORTS</span>
+        <ul class="bullet bullet-blue">
+          <li><strong>NEO (New Engagement Overview)</strong> &mdash; input a company or industry, get a full market intelligence report</li>
+          <li><strong>QIR (Quarterly Industry Report)</strong> &mdash; auto-generate quarterly M&amp;A reports for industrial automation, software, etc.</li>
+          <li><strong>MIR (Market Intelligence Report)</strong> &mdash; ad-hoc industry deep dives with SWOT, transactions, public/private players</li>
+          <li><strong>Replicate &amp; replace SGA Analytics</strong> &mdash; if we nail NEO + QIR, expand to HVAC, building services, etc.</li>
+          <li><strong>Total Power proof-of-concept</strong> &mdash; Rogo will generate a sample NEO for Total Power as first benchmark</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-header"><h2>What We Need from You</h2></div>
+          <div class="card">
+            <div class="person-row">
+              <div class="person-name">Will Morrison</div>
+              <ul class="checklist">
+                <li>SBA franchise list (8,000-record Excel) for large dataset test</li>
+                <li>QIR key terms &amp; screening criteria used in PitchBook/CapIQ</li>
+                <li>NEO/QIR raw input data (Excel + Word writeup) that feeds each report</li>
+                <li>Clarification: does the QIR use IBIS World? If so, export and share</li>
+                <li>Canva exports of NEO/QIR as PPTX (or raw data + writeup and we'll build the template)</li>
+              </ul>
+            </div>
+            <div class="person-row" style="margin-bottom:0;">
+              <div class="person-name">Rich Phillips</div>
+              <ul class="checklist">
+                <li>PowerPoint versions of NEO and QIR templates (Canva export to PPTX)</li>
+                <li>Send additional example deliverables to the Rogo SharePoint folder</li>
+                <li>Confirm: how do you define "industrial automation" and "software" for QIR screening?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-header"><h2>What Rogo Will Deliver</h2></div>
+          <div class="card">
+            <ul class="bullet">
+              <li><strong>Total Power NEO</strong> &mdash; sample report as first proof-of-concept + Loom video</li>
+              <li><strong>NEO skill</strong> &mdash; input company or industry, auto-generates SWOT, transactions, player map, market snapshot</li>
+              <li><strong>QIR skill</strong> &mdash; quarterly M&amp;A report auto-generated from PitchBook/CapIQ data with Blue River formatting</li>
+              <li><strong>Buyers list skill</strong> &mdash; already in environment, refining based on today's session</li>
+              <li><strong>Blue River master slide template</strong> for all PPTX outputs</li>
+              <li><strong>Grata vs. Rogo comparison</strong> &mdash; side-by-side list for one engagement to evaluate coverage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Sample Queries to Run Today</h2></div>
+      <div class="query-box">"Build a target list of 40 companies in industrial automation services with $10M&ndash;$100M revenue, privately held, in the U.S. Include company name, website, city/state, employee count, estimated revenue, services offered, and ownership type."</div>
+      <div class="query-box">"I'm uploading an Excel file with 500 franchise companies. Filter to only those offering industrial or commercial services, with 50+ franchise locations. Add columns for estimated revenue, ownership structure, and a one-line business description."</div>
+      <div class="query-box">"Create a market intelligence report on the building materials manufacturing industry. Include a SWOT analysis, list of active buyers and sellers (public and private), M&amp;A transactions from the last 12 months with deal values, and key industry trends."</div>
+      <div class="query-box">"Pull all M&amp;A transactions in the HVAC services space from the last 6 months. Include acquirer, target, deal value, EV/EBITDA multiple where available, and a brief description of each deal."</div>
+      <div class="query-box">"Use Total Power as an example company. Identify the 3 most relevant industries they operate in and explain which one would be the best fit for a market intelligence report. Then generate that report."</div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Skills Being Built</h2></div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-1);">B</div>
+        <div>
+          <div class="skill-name">Blue River Buyers List</div>
+          <div class="skill-desc">Upload client criteria or company &rarr; auto-generates formatted target list with employee count (PitchBook, Crunchbase, LinkedIn, web), revenue, services, end markets, ownership, and strategic rationale. Follows Blue River's column format exactly.</div>
+          <div class="skill-status status-live">In Environment &mdash; Refining</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-2);">N</div>
+        <div>
+          <div class="skill-name">NEO &mdash; New Engagement Overview</div>
+          <div class="skill-desc">Input company or industry &rarr; Rogo identifies relevant market, confirms with user, then generates SWOT, active players, M&amp;A transactions, market snapshot using Blue River's template.</div>
+          <div class="skill-status status-building">Building &mdash; Needs PPTX Template &amp; Input Clarification</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-2);">Q</div>
+        <div>
+          <div class="skill-name">QIR &mdash; Quarterly Industry Report</div>
+          <div class="skill-desc">Auto-generates quarterly M&amp;A reports (industrial automation, software, expandable). Pulls transactions from PitchBook/CapIQ, generates charts, formats to Blue River's QIR layout. Goal: replicate &amp; replace SGA Analytics.</div>
+          <div class="skill-status status-building">Building &mdash; Needs Key Terms, Criteria &amp; Raw Data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: AOD -->
+  <!-- ===================================================================== -->
+  <div id="tab-aod" class="tab-panel">
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Scheduled Session</h2>
+        <span class="section-badge">To Be Scheduled</span>
+      </div>
+      <div class="meeting-card" style="border-style: dashed;">
+        <div class="meeting-header">
+          <div class="meeting-title">AOD (Alternative Opportunities Division) Deep-Dive</div>
+          <div class="meeting-time tbd">To Be Scheduled</div>
+        </div>
+        <div class="meeting-attendees">
+          <span class="attendee">Taryn Sundby</span>
+          <span class="attendee">Dan (MD, optional)</span>
+          <span class="attendee rogo">Ben (Rogo)</span>
+        </div>
+        <div class="section-desc" style="margin-bottom:0;">Rich &mdash; please coordinate a 30-minute slot for Taryn + Dan with Ben. Taryn will also join the Buy Side session tomorrow for additional exposure.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Use Cases to Test</h2></div>
+      <div class="card">
+        <span class="pillar-tag teal">AOD WORKFLOWS</span>
+        <ul class="bullet bullet-teal">
+          <li><strong>Pivot list automation</strong> &mdash; auto-pull Salesforce report, filter by EBITDA threshold, format to conference-ready list</li>
+          <li><strong>Buyer identification for AOD targets</strong> &mdash; when a target doesn't fit the original client, find alternative buyers from your PE database</li>
+          <li><strong>Engagement agreement cross-reference</strong> &mdash; query 200+ PE groups with active engagement agreements, match to AOD targets</li>
+          <li><strong>PE portfolio scraping</strong> &mdash; automatically comb PE group websites for portfolio companies, match to AOD sectors</li>
+          <li><strong>Conference prep materials</strong> &mdash; generate one-pagers or talking points for each pivot meeting</li>
+          <li><strong>Salesforce report &rarr; formatted document</strong> &mdash; export SF report, drop into Rogo, auto-format into deliverable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-header"><h2>What We Need from Taryn</h2></div>
+          <div class="card">
+            <ul class="checklist">
+              <li>Exported Salesforce pivot list report (the one built with Tina)</li>
+              <li>Walkthrough: engagement agreement &rarr; target identified &rarr; doesn't fit &rarr; AOD buyer search</li>
+              <li>List of PE groups with engagement agreements (~200) to test portfolio scraping</li>
+              <li>Example AOD engagement to run through Rogo end-to-end</li>
+              <li>Salesforce custom fields specific to AOD objects</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="section-header"><h2>What Rogo Will Deliver</h2></div>
+          <div class="card">
+            <ul class="bullet bullet-teal">
+              <li><strong>Pivot list skill</strong> &mdash; upload SF export, auto-filter and format for conferences</li>
+              <li><strong>AOD buyer matching</strong> &mdash; cross-reference AOD targets against PE groups + portfolio companies</li>
+              <li><strong>PE portfolio scraper</strong> &mdash; auto-scan PE websites for portfolio holdings by sector</li>
+              <li><strong>Conference prep automation</strong> &mdash; one-pagers and talking points per pivot meeting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><h2>Sample Queries to Run Today</h2></div>
+      <div class="query-box">"I have a target company in the commercial HVAC services space that didn't fit our client's criteria. Find 20 PE groups that have active portfolio companies in HVAC or building services. For each, list the fund name, relevant portfolio company, and why they'd be a fit."</div>
+      <div class="query-box">"I'm uploading an exported Salesforce report of 150 pivot targets. Organize this into a formatted Excel with columns for company name, EBITDA, industry, location, and recommended buyer type (strategic vs. PE)."</div>
+      <div class="query-box">"Go to Providence Equity's website, pull their full portfolio, and identify any companies in the industrial services space. Then explain why each would be a relevant buyer for a $20M revenue facility maintenance company."</div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: SKILLS & DELIVERABLES -->
+  <!-- ===================================================================== -->
+  <div id="tab-skills" class="tab-panel">
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Skills Being Built for Blue River</h2>
+        <span class="section-badge">9 Custom Automations</span>
+      </div>
+      <div class="section-desc">Skills are step-by-step instructions injected into Rogo so complex workflows become one-click. Each references Blue River's templates, formats, and processes. Starting next week, the team will be able to create and edit skills directly via the new Skill Builder UI.</div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-1);">1</div>
+        <div>
+          <div class="skill-name">Blue River Buyers List</div>
+          <div class="skill-desc">Upload client criteria or company name &rarr; auto-generates formatted target/buyer list with company details, employee count (PitchBook, Crunchbase, LinkedIn, web), revenue estimates, services, end markets, ownership, and strategic rationale.</div>
+          <div class="skill-status status-live">In Environment &mdash; Refining</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-2);">2</div>
+        <div>
+          <div class="skill-name">NEO &mdash; New Engagement Overview</div>
+          <div class="skill-desc">Input company or industry &rarr; Rogo identifies market, confirms with user, generates full report: SWOT, buyers/sellers, M&amp;A transactions, market snapshot. Uses Blue River template.</div>
+          <div class="skill-status status-building">Building &mdash; Needs PPTX Template</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-2);">3</div>
+        <div>
+          <div class="skill-name">QIR &mdash; Quarterly Industry Report</div>
+          <div class="skill-desc">Auto-generates quarterly M&amp;A reports (industrial automation, software, expandable). Pulls from PitchBook/CapIQ, builds charts, formats to Blue River layout. Goal: replace SGA Analytics.</div>
+          <div class="skill-status status-building">Building &mdash; Needs Screening Criteria &amp; Raw Data</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-3);">4</div>
+        <div>
+          <div class="skill-name">Valuation Model Automation</div>
+          <div class="skill-desc">Migrate Gavin's ChatGPT workflow. DCF, comps, precedent transactions auto-populated from PitchBook/CapIQ. Formatted Excel with sensitivity tables.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Sell Side Session (Apr 14)</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-3);">5</div>
+        <div>
+          <div class="skill-name">CIM / Teaser / Pitch Deck</div>
+          <div class="skill-desc">One-click branded sell-side materials. Input engagement details, outputs PPTX with financials, company overview, and market context.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Templates &amp; Examples</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-4);">6</div>
+        <div>
+          <div class="skill-name">Marketing Outreach &amp; Messaging</div>
+          <div class="skill-desc">Drag-and-drop client criteria &rarr; personalized outreach emails, talk tracks, and value props per target. Pulls Salesforce engagement data + web research.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Buy Side Session (Apr 14)</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-4);">7</div>
+        <div>
+          <div class="skill-name">Salesforce Navigation</div>
+          <div class="skill-desc">Teaches Rogo Blue River's custom SF objects (targets, engagements, AOD, pivots). Enables natural-language queries: "show me all stale targets" or "pull the account for [client]."</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Object Map from Randi</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-5);">8</div>
+        <div>
+          <div class="skill-name">SharePoint Navigation</div>
+          <div class="skill-desc">Teaches Rogo Blue River's SharePoint file structure with fallback logic (v168 vs. date-modified, folder naming conventions). Enables "find the latest CIM for [client]" queries.</div>
+          <div class="skill-status status-planned">Planned &mdash; Pending Folder Structure Walkthrough</div>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon" style="color: var(--chart-5);">9</div>
+        <div>
+          <div class="skill-name">Blue River Master Slide Template</div>
+          <div class="skill-desc">Branded PPTX template used as the base for all presentation outputs (CIMs, pitches, NEOs, QIRs). Blue River fonts, colors, and layout conventions.</div>
+          <div class="skill-status status-building">Building &mdash; In Progress</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Pre-built skills -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Pre-Built Skills (Already in Your Environment)</h2>
+        <span class="section-badge">Ready to Test</span>
+      </div>
+      <div class="section-desc">These are Rogo default skills available to every user today. Test them while we build the Blue River-specific versions above.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">DCF Model</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">Discounted cash flow</div>
+        </div>
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">LBO Model</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">Leveraged buyout</div>
+        </div>
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">3-Statement Model</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">IS / BS / CF</div>
+        </div>
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">Diligence Tracker</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">DD request + Gantt</div>
+        </div>
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">Precedent Tx Comps</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">M&amp;A benchmarking</div>
+        </div>
+        <div class="card-flat" style="text-align: center; padding: 12px;">
+          <div style="font-size: 0.8125rem; font-weight: 600;">MIP Builder</div>
+          <div style="font-size: 0.6875rem; color: var(--text-tertiary);">Mgmt incentive plan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">Prepared by Ben &amp; Ansh &mdash; Rogo &bull; Questions? Email or message us anytime.</div>
+
+</div>
+
+<script>
+function switchTab(tabId) {
+  // Deactivate all
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  // Activate selected
+  document.getElementById('tab-' + tabId).classList.add('active');
+  // Find the button — match by data or by order
+  const btns = document.querySelectorAll('.tab-btn');
+  const map = ['overview','sellside','buyside','research','aod','skills'];
+  const idx = map.indexOf(tabId);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  // Scroll to top of tab content
+  window.scrollTo({ top: document.querySelector('.tab-bar').offsetTop - 20, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
