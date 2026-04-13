@@ -254,9 +254,194 @@ ul.bullet li::before {
   .connector-grid { grid-template-columns: 1fr 1fr; }
   .tab-btn { padding: 8px 12px; font-size: 0.75rem; }
 }
+
+/* === PASSWORD GATE === */
+.auth-gate {
+  position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg, #0D3B2C 0%, #135B44 55%, #1D7559 100%);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  animation:auth-fade-in 0.35s ease-out;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.auth-gate.auth-hide { animation:auth-fade-out 0.4s ease-out forwards; pointer-events:none; }
+@keyframes auth-fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes auth-fade-out { from { opacity:1; } to { opacity:0; visibility:hidden; } }
+.auth-bg-pattern {
+  position:absolute; inset:0; overflow:hidden; opacity:0.08; pointer-events:none;
+  background-image:radial-gradient(circle at 20% 30%, #FFF 1px, transparent 1px),
+                   radial-gradient(circle at 80% 70%, #FFF 1px, transparent 1px),
+                   radial-gradient(circle at 50% 50%, #FFF 1px, transparent 1px);
+  background-size: 60px 60px, 80px 80px, 100px 100px;
+}
+.auth-card {
+  position:relative; background:var(--surface); border-radius:16px;
+  padding:44px 40px 36px; width:100%; max-width:440px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.15);
+  animation:auth-card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes auth-card-in { from { opacity:0; transform:translateY(12px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+.auth-brand { display:flex; align-items:center; gap:10px; margin-bottom:28px; justify-content:center; }
+.auth-brand-mark {
+  width:36px; height:36px; border-radius:10px;
+  background:linear-gradient(135deg, var(--brand-primary) 0%, #1D7559 100%);
+  display:flex; align-items:center; justify-content:center;
+  color:#FFF; font-weight:700; font-size:1rem; letter-spacing:-0.02em;
+  box-shadow:0 4px 12px rgba(19,91,68,0.25);
+}
+.auth-brand-text { font-size:0.95rem; font-weight:600; letter-spacing:-0.01em; color:var(--text-primary); }
+.auth-brand-text span { color:var(--brand-primary); }
+.auth-badge {
+  font-size:0.65rem; font-weight:600; color:var(--brand-primary);
+  background:var(--brand-secondary-solid); padding:5px 12px; border-radius:9999px;
+  text-transform:uppercase; letter-spacing:0.05em;
+  display:inline-block; margin-bottom:14px;
+}
+.auth-title {
+  font-size:1.4rem; font-weight:700; letter-spacing:-0.02em;
+  margin-bottom:8px; color:var(--text-primary); text-align:center;
+}
+.auth-subtitle {
+  font-size:0.85rem; color:var(--text-secondary); line-height:1.55;
+  text-align:center; margin-bottom:28px;
+}
+.auth-input-wrap { position:relative; margin-bottom:14px; }
+.auth-input {
+  width:100%; height:48px; padding:0 48px 0 16px;
+  font-family:inherit; font-size:0.92rem; font-weight:500;
+  border:1.5px solid var(--border-secondary-solid); border-radius:8px;
+  outline:none; background:var(--bg-secondary);
+  transition:all 0.15s ease; color:var(--text-primary);
+  letter-spacing:0.02em;
+}
+.auth-input::placeholder { color:var(--text-quaternary); font-weight:400; letter-spacing:0; }
+.auth-input:focus {
+  border-color:var(--brand-primary); background:var(--surface);
+  box-shadow:0 0 0 3px var(--brand-secondary);
+}
+.auth-input.auth-error {
+  border-color:#DC2626; background:#FEF2F2;
+  animation:auth-shake 0.4s ease-in-out;
+}
+@keyframes auth-shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.auth-enter-hint {
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  font-size:0.68rem; font-weight:600; color:var(--text-quaternary);
+  background:var(--bg-tertiary); padding:4px 8px; border-radius:6px;
+  letter-spacing:0.05em; text-transform:uppercase;
+  border:1px solid var(--border-primary-solid);
+  pointer-events:none;
+}
+.auth-error-msg {
+  font-size:0.75rem; color:#DC2626; font-weight:500;
+  margin-top:-6px; margin-bottom:14px; min-height:18px; text-align:center;
+  opacity:0; transition:opacity 0.2s;
+}
+.auth-error-msg.show { opacity:1; }
+.auth-submit {
+  width:100%; height:46px; border:none; border-radius:8px;
+  background:var(--brand-primary); color:#FFF;
+  font-family:inherit; font-size:0.9rem; font-weight:600;
+  cursor:pointer; transition:all 0.15s ease; letter-spacing:0.01em;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.auth-submit:hover { background:var(--brand-primary-hover); transform:translateY(-1px); box-shadow:0 4px 12px rgba(19,91,68,0.25); }
+.auth-submit:active { transform:translateY(0); }
+.auth-footer {
+  margin-top:24px; padding-top:20px;
+  border-top:1px solid var(--border-primary-solid);
+  text-align:center;
+  font-size:0.7rem; color:var(--text-quaternary); line-height:1.5;
+}
+.auth-footer strong { color:var(--text-tertiary); font-weight:600; }
+@media (max-width:500px) {
+  .auth-card { padding:36px 24px 28px; }
+  .auth-title { font-size:1.2rem; }
+}
 </style>
 </head>
 <body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div class="auth-gate" id="auth-gate">
+  <div class="auth-bg-pattern"></div>
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-brand-mark">R</div>
+      <div class="auth-brand-text">Rogo <span>&times;</span> Blue River</div>
+    </div>
+    <div style="text-align:center;">
+      <span class="auth-badge">Secure Access</span>
+    </div>
+    <h1 class="auth-title">Ben Requires Your Password</h1>
+    <p class="auth-subtitle">This trial action plan is confidential. Please enter the access password shared with you to continue.</p>
+    <div class="auth-input-wrap">
+      <input
+        type="password"
+        id="auth-input"
+        class="auth-input"
+        placeholder="Enter password"
+        autocomplete="off"
+        spellcheck="false"
+        autofocus>
+      <span class="auth-enter-hint">&#9166; Enter</span>
+    </div>
+    <div class="auth-error-msg" id="auth-error">Incorrect password. Please try again.</div>
+    <button class="auth-submit" id="auth-submit" type="button">
+      <span>Unlock Dashboard</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="auth-footer">
+      <strong>Rogo Technologies, Inc.</strong> &mdash; Confidential &amp; Proprietary<br>
+      Prepared for Blue River &mdash; April 2026
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PASSWORD = 'goblue';
+  var STORAGE_KEY = 'blueriver_trial_unlocked';
+  var gate = document.getElementById('auth-gate');
+  var input = document.getElementById('auth-input');
+  var errorMsg = document.getElementById('auth-error');
+  var submitBtn = document.getElementById('auth-submit');
+
+  try {
+    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+      gate.style.display = 'none';
+      return;
+    }
+  } catch (e) {}
+
+  function tryUnlock() {
+    var val = (input.value || '').trim().toLowerCase();
+    if (val === PASSWORD) {
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+      gate.classList.add('auth-hide');
+      setTimeout(function() { gate.style.display = 'none'; }, 400);
+    } else {
+      input.classList.add('auth-error');
+      errorMsg.classList.add('show');
+      input.select();
+      setTimeout(function() { input.classList.remove('auth-error'); }, 500);
+    }
+  }
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); }
+    else { errorMsg.classList.remove('show'); }
+  });
+  input.addEventListener('input', function() { errorMsg.classList.remove('show'); });
+  submitBtn.addEventListener('click', tryUnlock);
+
+  window.addEventListener('load', function() { input.focus(); });
+})();
+</script>
+
 <div class="container">
 
   <!-- HEADER -->
